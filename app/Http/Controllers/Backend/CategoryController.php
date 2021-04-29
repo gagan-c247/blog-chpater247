@@ -1,16 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
-use App\Models\Blog;
 
-class WelcomeController extends Controller
+class CategoryController extends Controller
 {
-    protected $blog;
-    public function __construct(Blog $blog){
-        $this->blog = $blog;
-    }
     /**
      * Display a listing of the resource.
      *
@@ -18,13 +13,7 @@ class WelcomeController extends Controller
      */
     public function index()
     {
-          $blogs = $this->blog->orderby('id','desc')->with('file')->get();
-        return view('welcome',compact('blogs'));
-    }
-
-    public function singleblog($id){
-        $blog = $this->blog->with('comment')->find($id);
-        return view('singleBlog',compact('blog'));
+        return view('admin.category.index');
     }
 
     /**

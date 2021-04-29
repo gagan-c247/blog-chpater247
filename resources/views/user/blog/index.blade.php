@@ -33,7 +33,7 @@
                                 {{isset($blog->created_at) && $blog->created_at != '' ? Carbon\Carbon::parse($blog->created_at, 'UTC')->isoFormat(' d MMM YYYY, h:mm a') : ''}}
                             </td>
                             <td>
-                                <a href="{{route('blog.edit',$blog->id)}}"  > <i class="fa fa-edit" style="font-size:20px"></i></a>
+                                <a href="{{route('blogs.edit',$blog->id)}}"  > <i class="fa fa-edit" style="font-size:20px"></i></a>
                                  <a href=""  ><i class="fa fa-trash" style="font-size:20px"></i></a> 
                             </td>
                         </tr>

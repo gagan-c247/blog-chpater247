@@ -1,16 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Frontend;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Blog;
+use App\Models\Comment;
 
-class WelcomeController extends Controller
+class CommentController extends Controller
 {
-    protected $blog;
-    public function __construct(Blog $blog){
-        $this->blog = $blog;
-    }
     /**
      * Display a listing of the resource.
      *
@@ -18,13 +15,7 @@ class WelcomeController extends Controller
      */
     public function index()
     {
-          $blogs = $this->blog->orderby('id','desc')->with('file')->get();
-        return view('welcome',compact('blogs'));
-    }
-
-    public function singleblog($id){
-        $blog = $this->blog->with('comment')->find($id);
-        return view('singleBlog',compact('blog'));
+        //
     }
 
     /**
@@ -45,7 +36,10 @@ class WelcomeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // return $request->all();
+        $request['content'] = $request['comment'];
+        Comment::create($request->except(['_token','name','comment']));
+        return redirect()->back();
     }
 
     /**

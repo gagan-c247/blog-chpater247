@@ -54,7 +54,7 @@ img {
             <div class="offset-3 col-md-6">
                 <h1 class="text-center font-weight-bold">{{$blog->exists ? 'Edit' : 'Create'}} Blog Form</h1>
                 {!!Form::model($blog,[
-                    'route'=> $blog->exists ? ['blog.update',$blog->id] : ['blog.store'],
+                    'route'=> $blog->exists ? ['blogs.update',$blog->id] : ['blogs.store'],
                     'method'=>$blog->exists ? 'PUT' : 'POST',
                     'id' => 'form_blog_id',
                     'files' => true

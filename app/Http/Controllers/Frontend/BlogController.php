@@ -58,7 +58,7 @@ class BlogController extends Controller
        
         $blog = $this->blog->create($request->except(['_token','blog_image'])); 
         session()->flash('success','Inserted Successfully');
-        return redirect()->route('blog.edit',$blog->id);
+        return redirect()->route('blogs.edit',$blog->id);
 
     }
 
@@ -108,7 +108,7 @@ class BlogController extends Controller
         }
         $blog = $this->blog->where('id',$id)->update($request->except(['_method','_token','blog_image']));
         session()->flash('success','Updated Successfully');
-        return redirect()->route('blog.edit',$id);  
+        return redirect()->route('blogs.edit',$id);  
     }
 
     /**

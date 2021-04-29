@@ -11,4 +11,8 @@ class Blog extends Model
     public function file(){
         return $this->belongsTo('App\Models\File','file_id');
     }
+
+    public function comment(){
+        return $this->hasmany('App\Models\Comment','Blog_id');
+    }
 }

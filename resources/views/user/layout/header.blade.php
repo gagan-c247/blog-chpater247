@@ -42,10 +42,10 @@
           </li>
           @if (Auth::check())
                <li class="nav-item">
-            <a class="nav-link" href="{{route('blog.create')}}">Create</a>
+            <a class="nav-link" href="{{route('blogs.create')}}">Create</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{route('blog.index')}}"> My Blog</a>
+            <a class="nav-link" href="{{route('blogs.index')}}"> My Blog</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
