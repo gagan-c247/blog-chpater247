@@ -63,7 +63,16 @@ img {
                     @csrf
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-md-12   ">
+                            <div class="col-md-12">
+                            @if (count($errors) > 0)
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
                               <div class="circle upload-button">
                                 <!-- User Profile Image -->
                                 

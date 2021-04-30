@@ -14,11 +14,11 @@ class AddUserIdToBlogsTable extends Migration
     public function up()
     {
         Schema::table('blogs', function (Blueprint $table) {
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->unsignedBigInteger('file_id')->nullable();
+            // $table->unsignedBigInteger('user_id')->nullable();
+            // $table->unsignedBigInteger('file_id')->nullable();
           
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('file_id')->references('id')->on('files')->onDelete('cascade');
+            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            // $table->foreign('file_id')->references('id')->on('files')->onDelete('cascade');
         });
     }
 
@@ -30,8 +30,8 @@ class AddUserIdToBlogsTable extends Migration
     public function down()
     {
         Schema::table('blogs', function (Blueprint $table) {
-            $table->dropForeign(['user_id']);
-            $table->dropForeign(['file_id']);
+            // $table->dropForeign(['user_id']);
+            // $table->dropForeign(['file_id']);
         });
     }
 }

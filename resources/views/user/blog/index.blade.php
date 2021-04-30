@@ -17,6 +17,7 @@
                 </tr>
             </thead>
             <tbody>
+                
                 @if (isset($blogs) && $blogs != '[]')
                     @foreach ($blogs as $blog)
                         <tr>

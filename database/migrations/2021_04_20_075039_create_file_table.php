@@ -15,10 +15,10 @@ class CreateFileTable extends Migration
     {
         Schema::create('files', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('filepath');
-            $table->string('size');
-            $table->string('type');
+            $table->string('name')->nullable();
+            $table->string('filepath')->nullable();
+            $table->string('size')->nullable();
+            $table->string('type')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

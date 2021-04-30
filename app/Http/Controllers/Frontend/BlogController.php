@@ -44,8 +44,13 @@ class BlogController extends Controller
     public function store(Request $request)
     {
         // return $request->all();
+        $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+            'blog_image' => 'required',
+        ]);
         
-        $request['user_id'] = auth()->user()->id;
+         $request['user_id'] = auth()->id();
         if($request->hasFile('blog_image')){
             $data['user_id'] = $request['user_id'];
             $data['type'] = $request->blog_image->extension();
