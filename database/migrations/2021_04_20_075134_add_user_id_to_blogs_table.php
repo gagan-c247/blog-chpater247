@@ -31,7 +31,9 @@ class AddUserIdToBlogsTable extends Migration
     {
         Schema::table('blogs', function (Blueprint $table) {
             $table->dropForeign(['user_id']);
+            $table->dropColumn('user_id');
             $table->dropForeign(['file_id']);
+            $table->dropColumn('file_id');
         });
     }
 }

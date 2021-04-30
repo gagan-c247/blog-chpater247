@@ -34,6 +34,6 @@ Route::resource('user/comment','Frontend\CommentController');
 
 Route::get('/admin','Backend\AdminController@index')->name('admin');
 Route::resource('admin/profile','Backend\ProfileController');
-
 Route::resource('admin/user','Backend\UserController');
 Route::resource('admin/blog','Backend\BlogController');
+Route::resource('admin/category','Backend\CategoryController');

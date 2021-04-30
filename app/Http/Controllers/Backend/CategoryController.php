@@ -3,9 +3,13 @@
 namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
-
+use App\Models\Category;
 class CategoryController extends Controller
 {
+    protected $category;
+    public function __construct(Category $category){
+        $this->category = $category;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +17,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('admin.category.index');
+        $categoies = Category::get();
+        return view('admin.category.index',compact('categoies'))->with('category',$this->category);
     }
 
     /**
@@ -34,7 +39,14 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'=> 'required',
+        ]);
+        
+        $request['user_id'] = auth()->id();
+        Category::create($request->except(['_token']));
+        return redirect()->back();
+
     }
 
     /**
@@ -56,7 +68,9 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = $this->category->find($id);
+        $categoies = Category::get();
+        return view('admin.category.index',compact('category','categoies'));
     }
 
     /**
@@ -68,7 +82,14 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // return $id;
+        $request->validate([
+            'name'=> 'required',
+        ]);
+        
+        // $request['user_id'] = auth()->id();
+        Category::where('id',$id)->update($request->except(['_token','_method']));
+        return redirect()->route('category.index');
     }
 
     /**
