@@ -25,7 +25,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // FrontEnd
 
-Route::get('/user/blog','Frontend\UserController@index')->name('user'); 
+Route::get('/user/blogs','Frontend\UserController@index')->name('user'); 
 Route::resource('user/blogs','Frontend\BlogController');
 Route::resource('user/comment','Frontend\CommentController');
 

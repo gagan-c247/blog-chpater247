@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Backend;
 // use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Blog;
+use App\Models\File;
+use App\Models\Category;
+use App\Models\BlogCategory;
 class BlogController extends Controller
 {
     protected $blog;
@@ -32,7 +35,8 @@ class BlogController extends Controller
      */
     public function create()
     {
-        return view('admin.blog.create')->with('blog',$this->blog);
+        $allCategory = Category::get();
+        return view('admin.blog.create',compact('allCategory'))->with('blog',$this->blog);
     }
 
     /**
@@ -43,7 +47,14 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        $request['user_id'] = auth()->user()->id;
+        $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+            'blog_image' => 'required',
+            'category' => 'required',
+        ]);
+        
+         $request['user_id'] = auth()->id();
         if($request->hasFile('blog_image')){
             $data['user_id'] = $request['user_id'];
             $data['type'] = $request->blog_image->extension();
@@ -54,7 +65,13 @@ class BlogController extends Controller
         }
    
        
-        $blog = $this->blog->create($request->except(['_token','blog_image'])); 
+        $blog = $this->blog->create($request->except(['_token','blog_image','category']));
+        
+
+        BlogCategory::create(['category_id'=>$request['category'],
+                               'blog_id'=>$blog['id'] 
+                            ]);
+
         session()->flash('success','Inserted Successfully');
         return redirect()->route('blog.edit',$blog->id);
     }
@@ -78,8 +95,9 @@ class BlogController extends Controller
      */
     public function edit($id)
     {
-        $blog = $this->blog->find($id);
-        return view('admin.blog.create',compact('blog'));
+        $blog = $this->blog->with('file','blogcategory')->find($id);
+        $allCategory = Category::get();
+        return view('admin.blog.create',compact('blog','allCategory'));
     }
 
     /**
@@ -91,7 +109,7 @@ class BlogController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+        // return $request->all();
         if($request->hasFile('blog_image')){
             $data['user_id'] = $request['user_id'];
             $data['type'] = $request->blog_image->extension();
@@ -100,7 +118,13 @@ class BlogController extends Controller
             $upload = File::create($data);
             $request['file_id'] = $upload->id;
         }
-        $blog = $this->blog->where('id',$id)->update($request->except(['_method','_token','blog_image']));
+        $blog = $this->blog->where('id',$id)->update($request->except(['_method','_token','blog_image','category']));
+        if($request->category){
+            $check = BlogCategory::where('blog_id' ,$id)->delete();
+            BlogCategory::create(['category_id'=>$request['category'],
+                                'blog_id'=>$id 
+                                ]); 
+        }
         session()->flash('success','Updated Successfully');
         return redirect()->route('blog.edit',$id);  
     }

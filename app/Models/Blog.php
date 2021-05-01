@@ -15,4 +15,7 @@ class Blog extends Model
     public function comment(){
         return $this->hasmany('App\Models\Comment','Blog_id');
     }
+    public function blogcategory(){
+        return $this->hasone('App\Models\BlogCategory')->with('category');
+    }
 }

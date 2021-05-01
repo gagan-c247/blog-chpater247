@@ -12,6 +12,7 @@
                     <div class="border">
                         <h1 class="text-center">{{$blog->title ?? ''}}</h1>
                         <p class="text-center">{{$blog->created_at ?? ''}}</p>
+                        <p class="text-center"><span class="font-weight-bold">category: </span>{{$blog->blogcategory->category->name ?? '-'}}</p>
                     </div>
                 </header>
 
@@ -31,7 +32,7 @@
                             </div>
                         </div>
                     @empty
-                        <p>No users</p>
+                        <p class="text-center font-weight-bold">No Comment found!!!</p>
                     @endforelse
                  
                 </footer>

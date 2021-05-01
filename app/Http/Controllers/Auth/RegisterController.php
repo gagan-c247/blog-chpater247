@@ -77,7 +77,7 @@ class RegisterController extends Controller
             $this->redirectTo= '/admin';
         }else{
             $user->attachRole('user');
-            $this->redirectTo= '/admin/blog';
+            $this->redirectTo= '/user/blogs';
         }
        
         return $user;

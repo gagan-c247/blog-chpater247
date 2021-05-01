@@ -101,6 +101,18 @@ img {
                         <textarea type="text" placeholder="Blog Title" rows="5" name="content" class="form-control">{{isset($blog->content) && $blog->content  ? $blog->content : ''}}</textarea>
                     </div>
                     <div class="form-group">
+                        <label for="">Category</label>
+                        <select name="category" id="" class="form-control">
+                            <option value="">Select Category</option>
+                            @forelse ($allCategory as $category)
+                                <option value="{{$category->id ?? ''}}" {{isset($blog->blogcategory->category_id) && $blog->blogcategory->category_id == $category->id ? 'selected': '' }}>{{$category->name ?? ''}}</option>
+                            @empty
+                                <option value="">No data found</option>
+                            @endforelse
+                           
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <input type="submit"  style="width: 100%;" class="btn btn-primary">
                     </div>
 

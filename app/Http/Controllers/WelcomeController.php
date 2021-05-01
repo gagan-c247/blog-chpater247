@@ -18,12 +18,12 @@ class WelcomeController extends Controller
      */
     public function index()
     {
-          $blogs = $this->blog->orderby('id','desc')->with('file')->get();
+        $blogs = $this->blog->orderby('id','desc')->with('file','blogcategory')->get();
         return view('welcome',compact('blogs'));
     }
 
     public function singleblog($id){
-        $blog = $this->blog->with('comment')->find($id);
+        $blog = $this->blog->with('comment','blogcategory')->find($id);
         return view('singleBlog',compact('blog'));
     }
 

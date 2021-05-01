@@ -17,8 +17,8 @@ class AddUserIdToBlogsTable extends Migration
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('file_id')->nullable();
           
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('file_id')->references('id')->on('files')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->after('content')->onDelete('cascade');
+            $table->foreign('file_id')->references('id')->on('files')->before('updated_at')->onDelete('cascade');
         });
     }
 
