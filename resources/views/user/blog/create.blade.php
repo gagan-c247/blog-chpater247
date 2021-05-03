@@ -94,11 +94,11 @@ img {
                     </div>
                     <div class="form-group">
                         <label for="">Title</label>
-                        <input type="text" placeholder="Blog Title" name="title" class="form-control" value="{{isset($blog->title) && $blog->title  ? $blog->title : ''}}">
+                        <input type="text" placeholder="Blog Title" name="title" class="form-control" value="{{isset($blog->title) && $blog->title  ? $blog->title : old('title')}}">
                     </div>
                     <div class="form-group">
                         <label for="">Content</label>
-                        <textarea type="text" placeholder="Blog Title" rows="5" name="content" class="form-control">{{isset($blog->content) && $blog->content  ? $blog->content : ''}}</textarea>
+                        <textarea type="text" placeholder="Blog Title" rows="5" name="content" class="form-control">{{isset($blog->content) && $blog->content  ? $blog->content : old('content')}}</textarea>
                     </div>
                     <div class="form-group">
                         <label for="">Category</label>

@@ -1,5 +1,6 @@
 
-@yield('footer')
 
+
+@include('user.layout.script')
 </body>
 </html>

@@ -83,12 +83,12 @@
                     <div class="form-group mb-4">
                         <label class="col-md-12 p-0">Blog Title</label>
                         <div class="col-md-12 border-bottom p-0">
-                            <input type="text" name="title" placeholder="Johnathan Doe" class="form-control p-0 border-0" value="{{isset($blog->title) && $blog->title != '' ? $blog->title : ''}}"> </div>
+                            <input type="text" name="title" placeholder="Johnathan Doe" class="form-control p-0 border-0" value="{{isset($blog->title) && $blog->title != '' ? $blog->title : old('title')}}"> </div>
                     </div>
                     <div class="form-group mb-4">
                         <label class="col-md-12 p-0">Blog Content</label>
                         <div class="col-md-12 border-bottom p-0">
-                            <textarea rows="5" name="content" class="form-control p-0 border-0">{{isset($blog->content) && $blog->content != '' ? $blog->content : ''}}</textarea>
+                            <textarea rows="5" name="content" class="form-control p-0 border-0">{{isset($blog->content) && $blog->content != '' ? $blog->content : old('content')}}</textarea>
                         </div>
                     </div>
                     <div class="form-group mb-4">
@@ -106,14 +106,14 @@
                     </div>
                     <div class="form-group mt-4 ">
                         @if (count($errors) > 0)
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                     </div>
                     <div class="form-group mt-4 ">
                         <div class="col-sm-12 border-top pt-2">

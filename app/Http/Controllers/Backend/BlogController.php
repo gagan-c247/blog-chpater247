@@ -8,6 +8,7 @@ use App\Models\Blog;
 use App\Models\File;
 use App\Models\Category;
 use App\Models\BlogCategory;
+use App\Http\Requests\BlogRequest;
 class BlogController extends Controller
 {
     protected $blog;
@@ -45,16 +46,11 @@ class BlogController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BlogRequest $request)
     {
-        $request->validate([
-            'title' => 'required',
-            'content' => 'required',
-            'blog_image' => 'required',
-            'category' => 'required',
-        ]);
+        // $validated = $request->validated();
         
-         $request['user_id'] = auth()->id();
+        $request['user_id'] = auth()->id();
         if($request->hasFile('blog_image')){
             $data['user_id'] = $request['user_id'];
             $data['type'] = $request->blog_image->extension();
@@ -62,6 +58,9 @@ class BlogController extends Controller
             $file = $request->blog_image->storeAS('images',$data['filepath'],'public');
             $upload = File::create($data);
             $request['file_id'] = $upload->id;
+        }else{
+            session()->flash('danger','Choose image blog');
+            return redirect()->back()->withInput();
         }
    
        
@@ -107,7 +106,7 @@ class BlogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(BlogRequest $request, $id)
     {
         // return $request->all();
         if($request->hasFile('blog_image')){
