@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
+
 
 class Blog extends Model
 {   
@@ -17,5 +19,17 @@ class Blog extends Model
     }
     public function blogcategory(){
         return $this->hasone('App\Models\BlogCategory')->with('category');
+    }
+
+    // public function setTitleAttribute($value)
+    // {
+    //     $this->attributes['title'] =$value;
+    //     $this->attributes['slug'] = Str::slug($value,'-');
+     
+    // }
+
+    public function getRouteKeyName()
+    {   
+        return 'slug';
     }
 }

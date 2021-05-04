@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 Route::get('/', 'WelcomeController@index')->name('welcome');
-Route::get('/singleblog/{id}','WelcomeController@singleblog')->name('singleblog');
+Route::get('/singleblog/{slug}','WelcomeController@singleblog')->name('singleblog');
 
 Route::get('/home', 'HomeController@index')->name('home');
 

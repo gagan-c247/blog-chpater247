@@ -60,7 +60,7 @@
                             </div>
                         </div>
                         <div class="content">
-                           <a href="{{route('singleblog',$blog->id)}}"> <p>{{$blog->content}}</p></a>
+                           <a href="{{route('singleblog',$blog->slug)}}"> <p>{{$blog->content}}</p></a>
                         </div>
                     </div>
                 </div>

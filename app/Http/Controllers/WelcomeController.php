@@ -22,8 +22,9 @@ class WelcomeController extends Controller
         return view('welcome',compact('blogs'));
     }
 
-    public function singleblog($id){
-        $blog = $this->blog->with('comment','blogcategory')->find($id);
+    public function singleblog($slug){
+        // return $slug;
+        $blog = $this->blog->where('slug',$slug)->with('comment','blogcategory')->first();
         return view('singleBlog',compact('blog'));
     }
 
